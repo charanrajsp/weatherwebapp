@@ -27,6 +27,7 @@ async function getWeather()
         document.getElementById('temperature').dataset.unit = 'C';
         document.getElementById('humidity').innerText = data.main.humidity;
         document.getElementById('wind-speed').innerText = data.wind.speed;
+        document.getElementById('description').innerText = data.weather[0].description;
 
         
         document.getElementById('country').innerText = data.sys.country;
