@@ -28,18 +28,19 @@ async function getWeather()
         document.getElementById('humidity').innerText = data.main.humidity;
         document.getElementById('wind-speed').innerText = data.wind.speed;
 
-        // Display Country, State, Longitude, Latitude
+        
         document.getElementById('country').innerText = data.sys.country;
         document.getElementById('longitude').innerText = data.coord.lon;
         document.getElementById('latitude').innerText = data.coord.lat;
+        
         await getStateFromCoordinates(data.coord.lat, data.coord.lon);
         
-        // Get weather condition & time of day
+       
         const weatherMain = data.weather[0].main.toLowerCase();
         const isNight = data.dt > data.sys.sunset;
 
-        // Map weather conditions to Unicode symbols
-        let weatherSymbol = "❓"; // Default unknown symbol
+        
+        let weatherSymbol = "❓"; 
 
         if (weatherMain.includes("clear"))
              {
@@ -62,7 +63,8 @@ async function getWeather()
         }
 
         document.getElementById('weather-icon').innerText = weatherSymbol;
-        // Set Background Image
+       
+        // Set Background Images based on weather condition 
         let backgroundUrl = '';
 
         if (weatherMain.includes("clear")) 
@@ -70,7 +72,7 @@ async function getWeather()
             backgroundUrl = isNight ? "url('/images/clearnight.jpg')" : "url('/images/normal.jpg')";
         } else if (weatherMain.includes("cloud")) 
             {
-            backgroundUrl = isNight ? "url('/images/night.jpg')" : "url('/images/cloudy.jpg')";
+            backgroundUrl = isNight ? "url('/images/night.jpg')" : "url('/images/sunny.jpg')";
         } else if (weatherMain.includes("rain")) 
             {
             backgroundUrl = isNight ? "url('/images/Rainy.jpg')" : "url('/images/Rainy.jpg')";
