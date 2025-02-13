@@ -27,8 +27,7 @@ async function getWeather()
         document.getElementById('temperature').dataset.unit = 'C';
         document.getElementById('humidity').innerText = data.main.humidity;
         document.getElementById('wind-speed').innerText = data.wind.speed;
-
-        
+        document.getElementById('description').innerText = data.weather[0].description;
         document.getElementById('country').innerText = data.sys.country;
         document.getElementById('longitude').innerText = data.coord.lon;
         document.getElementById('latitude').innerText = data.coord.lat;
@@ -45,19 +44,24 @@ async function getWeather()
         if (weatherMain.includes("clear"))
              {
             weatherSymbol = isNight ? "🌙" : "☀️"; // Night or day
-        } else if (weatherMain.includes("cloud")) 
+        } 
+        else if (weatherMain.includes("cloud")) 
             {
             weatherSymbol = isNight ? "☁️" : "🌥️";
-        } else if (weatherMain.includes("rain")) 
+        } 
+        else if (weatherMain.includes("rain")) 
             {
             weatherSymbol = isNight ? "🌧️" : "🌦️";
-        } else if (weatherMain.includes("thunderstorm"))
+        } 
+        else if (weatherMain.includes("thunderstorm"))
              {
             weatherSymbol = "⛈️";
-        } else if (weatherMain.includes("snow")) 
+        } 
+        else if (weatherMain.includes("snow")) 
             {
             weatherSymbol = "❄️";
-        } else if (weatherMain.includes("mist") || weatherMain.includes("fog"))
+        } 
+        else if (weatherMain.includes("haze") || weatherMain.includes("smoke"))
              {
             weatherSymbol = "🌫️";
         }
@@ -69,23 +73,29 @@ async function getWeather()
 
         if (weatherMain.includes("clear")) 
             {
-            backgroundUrl = isNight ? "url('/images/clearnight.jpg')" : "url('/images/normal.jpg')";
-        } else if (weatherMain.includes("cloud")) 
+            backgroundUrl = isNight ? "url('/images/clearnight.jpg')" : "url('/images/clear.jpg')";
+        } 
+        else if (weatherMain.includes("cloud")) 
             {
-            backgroundUrl = isNight ? "url('/images/night.jpg')" : "url('/images/sunny.jpg')";
-        } else if (weatherMain.includes("rain")) 
+            backgroundUrl = isNight ? "url('/images/night.jpg')" : "url('/images/few clouds.jpg')";
+        } 
+        else if (weatherMain.includes("rain")) 
             {
             backgroundUrl = isNight ? "url('/images/Rainy.jpg')" : "url('/images/Rainy.jpg')";
-        } else if (weatherMain.includes("thunderstorm"))
+        } 
+        else if (weatherMain.includes("thunderstorm"))
              {
             backgroundUrl = "url('/images/strom.jpg')";
-        } else if (weatherMain.includes("snow")) 
+        } 
+        else if (weatherMain.includes("snow")) 
             {
             backgroundUrl = "url('/images/snow.jpg')";
-        } else if (weatherMain.includes("mist"))
+        } 
+        else if (weatherMain.includes("haze") || weatherMain.includes("smoke"))
              {
             backgroundUrl = "url('/images/mist.jpg')";
-        } else {
+        } 
+        else {
             backgroundUrl = "url('/images/normal.jpg')"; // Default image
         }
 
@@ -95,6 +105,8 @@ async function getWeather()
         document.body.style.transition = 'background 0.5s ease-in-out';
 
         document.querySelector('.weather-info').style.display = 'block';
+        console.log("Weather Condition:", weatherMain); // Debugging
+
 
     } 
     catch (error) 
